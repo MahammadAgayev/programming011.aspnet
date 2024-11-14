@@ -1,0 +1,33 @@
+﻿@model List<BookModel>
+
+<table class="book-table">
+    <thead class="book-thead">
+        <tr class="book-tr">
+            <th class="book-th">Name</th>
+            <th class="book-th">Author Name</th>
+            <th class="book-th">Release year</th>
+            <th class="book-th">Genre</th>
+        </tr>
+    </thead>
+    <tbody class="book-tbody">
+        @foreach (BookModel m in Model)
+        {
+            <tr class="book-tr" onclick="window.location.href='/books/details?bookId=@m.Id'">
+                <td class="book-td">@m.Name</td>
+                <td class="book-td">@m.AuthorName</td>
+                <td class="book-td">@m.ReleaseYear</td>
+                <td class="book-td">@m.Genre</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button onclick="window.location.href='/books/add'" class="buy-button add-button">
+    Add Book
+</button>
+
+@* @if ((bool?)ViewData["FromAddBook"] ?? false) *@
+@if (ViewBag.FromAddBook)
+{
+    <partial name="_CoolAnimationPartial" />
+}

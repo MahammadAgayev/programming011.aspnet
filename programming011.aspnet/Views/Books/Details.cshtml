@@ -1,0 +1,29 @@
+﻿@model BookDetailedModel
+<div class="book-container">
+    <!-- Book Cover -->
+    <div class="book-cover">
+        <img src="@Model.CoverImage" alt="Book Cover">
+    </div>
+
+    <!-- Book Details -->
+    <div class="book-details">
+        <h1 class="book-title">@Model.Title</h1>
+        <p class="book-author">by @Model.AuthorName</p>
+
+        <div class="book-description">
+           <p>@Model.Description</p>
+        </div>
+
+        <!-- Book Metadata -->
+        <div class="book-meta">
+            <span><strong>Genre:</strong> @Model.Genre</span>
+            <span><strong>Pages:</strong> @Model.Pages</span>
+            <span><strong>Published:</strong> @Model.ReleaseYear</span>
+        </div>
+
+        <!-- Purchase Button -->
+        <a href="https://example.com" class="buy-button" target="_blank">Buy Now</a>
+    </div>
+</div>
+
+@* <partial name="_CoolAnimationPartial"></partial> *@

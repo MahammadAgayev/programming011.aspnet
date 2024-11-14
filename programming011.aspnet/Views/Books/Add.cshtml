@@ -1,0 +1,59 @@
+﻿@model AddBookModel
+<div class="form-container">
+    <h2>Add New Book</h2>
+    <form asp-controller="Books" asp-action="Add">
+        <!-- Title -->
+        <div class="form-group">
+            <label asp-for="Title">Book Title</label>
+            <input type="text" asp-for="Title">
+            @* <span class="text-warning" asp-validation-for="Title"></span> *@
+        </div>
+
+        <!-- Author -->
+        <div class="form-group">
+            <label asp-for="AuthorName">Author</label>
+            <input type="text" asp-for="AuthorName">
+            @* <span class="text-warning" asp-validation-for="AuthorName"></span> *@
+        </div>
+
+        <!-- Genre -->
+        <div class="form-group">
+            <label asp-for="Genre">Genre</label>
+            <input type="text" asp-for="Genre"/>
+            @* <span class="text-warning" asp-validation-for="Genre"></span> *@
+        </div>
+
+        <!-- Pages -->
+        <div class="form-group">
+            <label asp-for="Pages">Pages</label>
+            <input type="number" asp-for="Pages">
+            @* <span class="text-warning" asp-validation-for="Pages"></span> *@
+        </div>
+
+        <!-- Published Date -->
+        <div class="form-group">
+            <label>Published Date</label>
+            <input type="date" asp-for="PublishedDate">
+            @* <span class="text-warning" asp-validation-for="PublishedDate"></span> *@
+        </div>
+
+@*              <!-- Book Cover -->
+         <div class="form-group">
+             <label for="cover">Book Cover</label>
+             <input type="file" id="cover" name="cover" accept="image/*">
+         </div>
+*@
+        <!-- Description -->
+        <div class="form-group">
+            <label asp-for="Description">Description</label>
+            <textarea asp-for="Description"></textarea>
+            @* <span class="text-warning" asp-validation-for="Description"></span> *@
+        </div>
+        <div asp-validation-summary="All"></div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-button">Add Book</button>
+    </form>
+</div>
+
+<partial name="_ValidationScriptsPartial"></partial>
