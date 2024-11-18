@@ -144,6 +144,22 @@ h2 {
     background-color: #45a049;
 }
 
+.delete-button {
+    background-color: red;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+    text-decoration: none;
+}
+.delete-button:hover {
+    background-color: darkred;
+}
+
 .add-button {
     margin-bottom: 10%;
 }

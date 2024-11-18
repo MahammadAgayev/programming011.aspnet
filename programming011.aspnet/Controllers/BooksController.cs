@@ -129,5 +129,21 @@ namespace programming011.aspnet.Controllers
         {
             return View();
         }
+
+
+        [HttpPost]
+        public IActionResult Delete(DeleteBookModel model)
+        {
+            Book b = _books.FirstOrDefault(x => x.Id == model.Id);
+
+            if (b == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            _books.Remove(b);
+
+            return RedirectToAction("Index");
+        }
     }
 }

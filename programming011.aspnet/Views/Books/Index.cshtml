@@ -7,6 +7,7 @@
             <th class="book-th">Author Name</th>
             <th class="book-th">Release year</th>
             <th class="book-th">Genre</th>
+            <th class="book-th"></th>
         </tr>
     </thead>
     <tbody class="book-tbody">
@@ -17,6 +18,12 @@
                 <td class="book-td">@m.AuthorName</td>
                 <td class="book-td">@m.ReleaseYear</td>
                 <td class="book-td">@m.Genre</td>
+                <td class="book-td">
+                    <form asp-controller="Books" asp-action="Delete">
+                        <input name="Id" hidden value="@m.Id" />
+                        <button class="delete-button">Delete</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
