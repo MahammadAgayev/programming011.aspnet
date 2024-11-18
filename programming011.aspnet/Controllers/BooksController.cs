@@ -8,49 +8,56 @@ namespace programming011.aspnet.Controllers
 {
     public class BooksController : Controller
     {
-        public static List<Book> _books = new List<Book>()
+        //public static List<Book> _books = new List<Book>()
+        //{
+        //    new Book
+        //    {
+        //        Id = 1,
+        //        AuthorName = "Nadir Sefiyev",
+        //        Genre = "Dram",
+        //        Title = "Dawn of C#",
+        //        ReleaseYear = 2024,
+        //        CoverImage = "favicon.ico",
+        //        Description = "Lorem ipsum",
+        //        Pages = 200
+        //    },
+        //    new Book
+        //    {
+        //        Id = 2,
+        //        AuthorName = "Zumrat Seriyev",
+        //        Genre = "Adventure",
+        //        Title = "The secret island",
+        //        ReleaseYear = 1978,
+        //        CoverImage = "favicon.ico",
+        //        Description = "Lorem ipsum",
+        //        Pages = 200
+        //    },
+        //    new Book
+        //    {
+        //        Id = 3,
+        //        AuthorName = "Farman Isbatov",
+        //        Title = "Ways of online courses",
+        //        Genre = "Education",
+        //        ReleaseYear = 2024,
+        //        CoverImage = "favicon.ico",
+        //        Description = "Lorem ipsum",
+        //        Pages = 200
+        //    }
+        //};
+
+        private readonly LibraryDbContext _context;
+
+        public BooksController(LibraryDbContext context)
         {
-            new Book
-            {
-                Id = 1,
-                AuthorName = "Nadir Sefiyev",
-                Genre = "Dram",
-                Title = "Dawn of C#",
-                ReleaseYear = 2024,
-                CoverImage = "favicon.ico",
-                Description = "Lorem ipsum",
-                Pages = 200
-            },
-            new Book
-            {
-                Id = 2,
-                AuthorName = "Zumrat Seriyev",
-                Genre = "Adventure",
-                Title = "The secret island",
-                ReleaseYear = 1978,
-                CoverImage = "favicon.ico",
-                Description = "Lorem ipsum",
-                Pages = 200
-            },
-            new Book
-            {
-                Id = 3,
-                AuthorName = "Farman Isbatov",
-                Title = "Ways of online courses",
-                Genre = "Education",
-                ReleaseYear = 2024,
-                CoverImage = "favicon.ico",
-                Description = "Lorem ipsum",
-                Pages = 200
-            }
-        };
+            _context = context;
+        }
 
         [TempData]
         public bool FromAddBook { get; set; }
 
         public IActionResult Index(bool fromAddBook)
         {
-            var models = _books.Select(x => new BookModel
+            var models = _context.Books.Select(x => new BookModel
             {
                 Id = x.Id,
                 AuthorName = x.AuthorName,
@@ -78,7 +85,7 @@ namespace programming011.aspnet.Controllers
 
         public IActionResult Details(int bookId)
         {
-            var book = _books.FirstOrDefault(x => x.Id == bookId);
+            var book = _context.Books.FirstOrDefault(x => x.Id == bookId);
 
             var model = new BookDetailedModel
             {
@@ -113,9 +120,9 @@ namespace programming011.aspnet.Controllers
                 ReleaseYear = model.PublishedDate.Year
             };
 
-            b.Id = _books.Count + 1;
 
-            _books.Add(b);
+            _context.Books.Add(b);
+            _context.SaveChanges();
 
             //TempData["FromAddBook"] = true;
             FromAddBook = true;
@@ -134,14 +141,15 @@ namespace programming011.aspnet.Controllers
         [HttpPost]
         public IActionResult Delete(DeleteBookModel model)
         {
-            Book b = _books.FirstOrDefault(x => x.Id == model.Id);
+            Book b = _context.Books.FirstOrDefault(x => x.Id == model.Id);
 
             if (b == null)
             {
                 return RedirectToAction("Index");
             }
 
-            _books.Remove(b);
+            _context.Books.Remove(b);
+            _context.SaveChanges();
 
             return RedirectToAction("Index");
         }
